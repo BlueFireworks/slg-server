@@ -31,7 +31,7 @@ find_create_u(DbDevice, #pt_ubase{name=Name, sex=Sex}) ->
   end.
 
 login_req(#pt_account{device=Device, base=Base}) ->
-  case model:trans(normal, fun()-> find_create_u(Device, Base) end) of
+  case model:trans(fun()-> find_create_u(Device, Base) end) of
     {atomic, {ok, R}} ->
       erlang:put(u_id, R#db_user.id),
       base_init(R#db_user.id);

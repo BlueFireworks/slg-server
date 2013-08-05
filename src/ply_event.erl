@@ -6,18 +6,18 @@
 
 -include("proto.hrl").
 
-slg_m_upt_s({Table, UsrId, Data}) ->
+slg_m_upt_s({Table, _UsrId, Data}) ->
   case ply_cache1:cache(Table) of
-    s -> player:send(spt_atom:atom_suffix(Table, "cah"), Data),
-         io:format(">> slg_m_upt_s ~p ~p ~p ~n", [Table, UsrId, Data]);
+    s -> player:send(spt_atom:atom_suffix(Table, "cah"), Data);
+         %% io:format(">> slg_m_upt_s ~p ~p ~p ~n", [Table, UsrId, Data]);
     _ -> do_nothing
   end.
 
 
-slg_m_upt_s_e({Table, UsrId, Id, List}) ->
+slg_m_upt_s_e({Table, UsrId, _Id, _List}) ->
   case ply_cache1:cache(Table) of
     s ->
-      io:format(">> slg_m_upt_s_e ~p ~p ~p ~p~n", [Table, UsrId, Id, List]),
+      %% io:format(">> slg_m_upt_s_e ~p ~p ~p ~p~n", [Table, UsrId, Id, List]),
       {ok, Db} = data:lookup_s(Table, UsrId),
       player:send(spt_atom:atom_suffix(Table, "cah"), Db);
     _ -> do_nothing
@@ -26,16 +26,16 @@ slg_m_upt_s_e({Table, UsrId, Id, List}) ->
 slg_m_upt_i({Table, Data}) ->
   case ply_cache1:cache(Table) of
     a ->
-      io:format(">> slg_m_upt_i ~p ~p~n", [Table, Data]),
+      %% io:format(">> slg_m_upt_i ~p ~p~n", [Table, Data]),
       player:send(spt_atom:atom_suffix(Table, "cah_upt"), Data);
     _ -> do_nothing
   end.
 
 %% 没办法，没实现单字段更新包
-slg_m_upt_i_e({Table, Id, List}) ->
+slg_m_upt_i_e({Table, Id, _List}) ->
   case ply_cache1:cache(Table) of
     a ->
-      io:format(">> slg_m_upt_i_e ~p ~p ~p~n", [Table, Id, List]),
+      %% io:format(">> slg_m_upt_i_e ~p ~p ~p~n", [Table, Id, List]),
       {ok, B} = data:lookup_i(Table, Id),
       player:send(spt_atom:atom_suffix(Table, "cah_upt"), B);
     _ -> do_nothing
@@ -46,18 +46,18 @@ slg_m_upt_i_e({Table, Id, List}) ->
 %% slg_m_del_s({Table, UsrId, Id}) ->
 %%   ok.
 
-slg_m_del_i({Table, UsrId, Id}) ->
+slg_m_del_i({Table, _UsrId, Id}) ->
   case ply_cache1:cache(Table) of
     a ->
-      io:format(">> slg_m_del_i ~p ~p ~p~n", [Table, UsrId, Id]),
+      %% io:format(">> slg_m_del_i ~p ~p ~p~n", [Table, UsrId, Id]),
       player:send(spt_atom:atom_suffix(Table, "cah_del"), #pt_pkid{id=Id});
     _ -> do_nothing
   end.
 
-slg_m_del_i_a({Table, UsrId, Ids}) ->
+slg_m_del_i_a({Table, _UsrId, Ids}) ->
   case ply_cache1:cache(Table) of
     a ->
-      io:format(">> slg_m_del_i_a ~p ~p ~p~n", [Table, UsrId, Ids]),
+      %% io:format(">> slg_m_del_i_a ~p ~p ~p~n", [Table, UsrId, Ids]),
       player:send(spt_atom:atom_suffix(Table, "cah_dels"), #pt_pkids{ids=Ids});
     _ -> do_nothing
   end.
@@ -66,10 +66,10 @@ slg_m_del_i_a({Table, UsrId, Ids}) ->
 %% slg_m_add_s({Table, UsrId, Data}) ->
 %%   ok.
 
-slg_m_add_i({Table, UsrId, Data}) ->
+slg_m_add_i({Table, _UsrId, Data}) ->
   case ply_cache1:cache(Table) of
     a ->
-      io:format(">>slg_m_add_i  ~p ~p ~p~n", [Table, UsrId, Data]),
+      %% io:format(">>slg_m_add_i ~p ~p ~p~n", [Table, UsrId, Data]),
       player:send(spt_atom:atom_suffix(Table, "cah_new"), Data);
     _ -> do_nothing
   end.
