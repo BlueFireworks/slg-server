@@ -51,9 +51,13 @@ base_init(UsrId) ->
 building_up_req(#pt_building{b_type=Type}) ->
   ID = data:id(buildings),
   UID = erlang:get(u_id),
-  B = #db_building{id=ID, user_id = UID, level=1, b_type=Type},
-  data:add_i(buildings, UID, B),
-  ok.
+  {ok, TArray} = data:lookup_a_e(buildings, UID, #db_building.b_type),
+  case lists:member(Type, TArray) of
+    true -> do_nothing;
+    false -> B = #db_building{id=ID, user_id = UID, level=1, b_type=Type},
+             data:add_i(buildings, UID, B)
+  end.
+
 
 %% 升级建筑请求.
 building_upl_req(#pt_building{id=Id}) ->
