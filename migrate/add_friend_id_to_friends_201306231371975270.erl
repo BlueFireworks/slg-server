@@ -4,7 +4,7 @@
 up() ->
   Query = "ALTER TABLE `friends` ADD COLUMN `friend_id` BIGINT(20) NOT NULL  AFTER `user_id` ;
   ",
-  model_exec:exec(migrate, Query),
+  model_exec:exec_n(Query),
   ok.
 
 down() ->

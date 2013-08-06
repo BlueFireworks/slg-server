@@ -7,7 +7,7 @@ up() ->
   `user_id` BIGINT NOT NULL ,
   PRIMARY KEY (`id`) );
   ",
-  model_exec:exec(migrate, Query),
+  model_exec:exec_n(Query),
   ok.
 
 down() ->
