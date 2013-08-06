@@ -23,6 +23,8 @@ OPTS = \
 	-noshell \
 	$(NULL)
 
+ADD_ARGS = -args_file config/erl_args.conf
+
 # rebar-用于编译
 REBAR := ./bin/rebar --config config/rebar.config
 UNAME := $(shell uname)
@@ -70,7 +72,8 @@ c:
 g:
 	ruby src/proto_gen.rb
 	ruby ./deps/slg_proto/src/proto_gen2.rb proto/ proto/svn/ ./deps/slg_proto/proto/code
-
+d:
+	erl $(OPTS) $(ADD_ARGS) -detached -name $(NODE) -s slg_server
 s:
 	erl $(OPTS) -name $(NODE) -s slg_server
 
