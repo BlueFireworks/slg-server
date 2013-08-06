@@ -2,6 +2,13 @@
 # 一些更高级的协议处理，现在用来处理cache_group类型.
 
 # 解析api.txt，将其返回为api的列表.
+#
+
+if RUBY_VERSION =~ /1.9/
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
+
 def parse_api(path)
   file = open(path, "r")
   api = {}
