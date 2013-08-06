@@ -42,7 +42,7 @@ deps:
 	$(REBAR) get-deps
 
 pl:
-	git pull git@42.121.105.8:slg-server.git master
+	git pull git@github.com:zhuoyikang/slg-server.git master
 	cd deps/slg_csv && git pull origin master
 	cd deps/slg_proto && git pull origin master
 	cd deps/slg_support && git pull origin master
