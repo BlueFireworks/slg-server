@@ -18,7 +18,7 @@
 
 *初始化数据库:* `make db`
 
-*启动:* `make s`，默认用户名加密码为：root，密码空；如果不是，自行修改slg_server.erl
+*启动:* `make s`，默认用户名加密码为：root，密码空；如果不是，请修改config/server.conf
 
 *测试:* 在新的终端执行`make e`，执行: `gt:start()`.
 

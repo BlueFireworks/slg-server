@@ -18,6 +18,7 @@ OPTS = \
 	-pa $(LOAD_PATH) \
 	-env ERL_MAX_ETS_TABLES 10000 \
 	-setcookie $(COOKIE) \
+	-smp disable \
 	+A 8 +K true +P 120000  # -smp disable \
 	-detached  \
 	-noshell \
